@@ -15,5 +15,5 @@ async def post_upload(file : UploadFile, author = None):
     code = await insert_image(bytes(file), author)
     return {
         "code" : code,
-        "url" : f"http://127.0.0.1:8000/api/image?code={code}"
+        "url" : f"https://filehost.fusionsid.repl.co/api/image?code={code}"
     }
