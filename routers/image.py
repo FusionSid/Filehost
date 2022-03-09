@@ -16,8 +16,6 @@ async def getimage(code : str):
     image_bytes = await get_image(code)
     if len(image_bytes) == 0:
         return {"error", "Image not found"}
-    print(image_bytes
-    )
     image = BytesIO(image_bytes[3])
     image.seek(0)
 
