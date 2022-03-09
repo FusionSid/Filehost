@@ -6,7 +6,7 @@ URL: https://filehost.fusionsid.repl.co/
 
 DOCS: https://filehost.fusionsid.repl.co/docs
 
-Upload:
+### Upload:
 
 ```py
 import requests
@@ -18,11 +18,15 @@ r = requests.post(url, files=files)
 print(r.json()) 
 ```
 
-Output:
+### Example Output:
 ```
-{'code': 'code', 'url': 'url_to_where_its_stored'}
+{
+  "code": "14kwDlNF",
+  "url": "https://filehost.fusionsid.repl.co/api/image?code=14kwDlNF"
+}
 ```
 
 Get image:
-make a request to the url returned from when you uploaded or do:
+
+You can either use the url tht was returned when you made uploaded the file or if you have the code you do:
 ```https://filehost.fusionsid.repl.co/api/image?code={The code}```
