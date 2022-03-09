@@ -17,7 +17,7 @@ image = APIRouter(tags=tags_metadata)
 
 
 @image.get("/api/image")
-@limiter.limit("10/minute")
+@limiter.limit("69/minute")
 async def getimage(request : Request, code : str):
     image_bytes = await get_image(code)
 

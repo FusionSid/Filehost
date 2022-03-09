@@ -26,7 +26,13 @@ print(r.json())
 }
 ```
 
-Get image:
+### Get image:
 
 You can either use the url tht was returned when you made uploaded the file or if you have the code you do:
 ```https://filehost.fusionsid.repl.co/api/image?code={The code}```
+
+###  Rate limits:
+
+`GET /api/image` This endpoint is limited to 69 get image requests per minute
+
+`POST /api/upload` This endpoint is limited to 42 uploads per minute
