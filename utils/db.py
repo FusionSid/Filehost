@@ -57,4 +57,7 @@ async def get_image(code):
     async with aiosqlite.connect("utils/database/images.db") as db:
         cur = await db.execute(f"""SELECT * FROM Images WHERE code='{code}'""")
         data = await cur.fetchall()
-    return data[0]
+    try:
+        return data[0]
+    except IndexError:
+        return False
