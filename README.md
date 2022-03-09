@@ -2,13 +2,16 @@
 
 **[Still in testing]**
 
+URL: https://filehost.fusionsid.repl.co/
+
+DOCS: https://filehost.fusionsid.repl.co/docs
 
 Upload:
 
 ```py
 import requests
 
-url = "{api_link}/api/upload"
+url = "https://filehost.fusionsid.repl.co/api/upload"
 
 files = {'file': open('file.png', 'rb')}
 r = requests.post(url, files=files)
@@ -22,4 +25,4 @@ Output:
 
 Get image:
 make a request to the url returned from when you uploaded or do:
-```{Link to api}/api/image?code={The code}```
+```https://filehost.fusionsid.repl.co/api/image?code={The code}```
