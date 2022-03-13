@@ -28,5 +28,5 @@ async def post_upload(request : Request, file : UploadFile, file_type : str):
     code = await insert_file(bytes(file), file_type)
     return {
         "code" : code,
-        "url" : f"https://filehost.fusionsid.repl.co/api/file?code={code}"
+        "url" : f"https://file-host.herokuapp.com/api/file?code={code}"
     }

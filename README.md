@@ -1,12 +1,13 @@
-# Image storage API
+# File storage API
 
-I will probably add more file types to this
+Supported file types: png, txt, jpeg, gif, mp4, mp3  
+Max file size: 15mb
 
 ---
 
-Base URL: https://filehost.fusionsid.repl.co/ (redirects to docs)
+Base URL: https://file-host.herokuapp.com/ (redirects to docs)
 
-DOCS: https://filehost.fusionsid.repl.co/docs
+DOCS: https://file-host.herokuapp.com/docs
 
 ---
 
@@ -15,9 +16,9 @@ DOCS: https://filehost.fusionsid.repl.co/docs
 ```py
 import requests
 
-url = "https://filehost.fusionsid.repl.co/api/upload"
+url = "https://file-host.herokuapp.com/api/upload?file_type=png" # check file types above
 
-files = {'file': open('file.png', 'rb')}
+files = {'file': open('file.png', 'rb'),}
 r = requests.post(url, files=files)
 print(r.json()) 
 ```
@@ -26,22 +27,22 @@ print(r.json())
 ```
 {
   "code": "14kwDlNF",
-  "url": "https://filehost.fusionsid.repl.co/api/image?code=14kwDlNF"
+  "url": "https://file-host.herokuapp.com/api/image?code=14kwDlNF"
 }
 ```
 
 ---
 
-### Get image:
+### Get File:
 
 You can either use the url tht was returned when you made uploaded the file or if you have the code you do:
-```https://filehost.fusionsid.repl.co/api/image?code={The code}```
+```https://file-host.herokuapp.com/api/image?code={The code}```
 
 ---
 
 ###  Rate limits:
 
-`GET /api/image` This endpoint is limited to 69 get image requests per minute
+`GET /api/file` This endpoint is limited to 69 get files requests per minute
 
 `POST /api/upload` This endpoint is limited to 42 uploads per minute
 

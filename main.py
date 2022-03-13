@@ -21,6 +21,10 @@ description = """
 
 This api lets you upload files which are stored and can be retreived later
 
+### Supported file types:
+
+- png, txt, jpeg, gif, mp4, mp3
+
 #### Source Code:
 [https://github.com/FusionSid/Filehost](https://github.com/FusionSid/Filehost)
 
