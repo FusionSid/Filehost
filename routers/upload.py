@@ -16,7 +16,6 @@ upload = APIRouter(tags=tags_metadata)
 @upload.post("/api/upload")
 @limiter.limit("42/minute")
 async def post_upload(request : Request, file : UploadFile, file_type : str):
-    await create_db()
     if file_type.lower() not in ['png', 'txt', 'jpeg', 'gif', 'mp4', 'mp3']:
         return {
             "error" : "Must include file type, Options: png, txt, jpeg, gif, mp4, mp3]"
