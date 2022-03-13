@@ -46,17 +46,13 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 async def home():
     return RedirectResponse("/docs")
 
-<<<<<<< HEAD
-app.include_router(file)
-=======
 @app.get("/stats")
 async def stats():
-  db_size = path.getsize("utils/database/images.db")
+  db_size = path.getsize("utils/database/files.db")
   return {
-    "images_uploaded" : len((await get_db())),
+    "files_uploaded" : len((await get_db())),
     "db" : f"{round((db_size / 1000000), 2)}mb"
   }
 
-app.include_router(image)
->>>>>>> f0e58c0e34f088afd95e5558397f629d4bccf9f8
+app.include_router(file)
 app.include_router(upload)
