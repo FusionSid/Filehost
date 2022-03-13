@@ -7,7 +7,8 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
-from utils import get_db
+from utils import get_db, create_db
+
 from os import path
 
 limiter = Limiter(key_func=get_remote_address)
@@ -53,6 +54,10 @@ async def stats():
     "files_uploaded" : len((await get_db())),
     "db" : f"{round((db_size / 1000000), 2)}mb"
   }
+
+@app.on_event("startup")
+async def startup():
+    await create_db()
 
 app.include_router(file)
 app.include_router(upload)
