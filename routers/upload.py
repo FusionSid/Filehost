@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, Request
+from fastapi import APIRouter, UploadFile, Request, Query
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from utils import *
@@ -7,7 +7,7 @@ limiter = Limiter(key_func=get_remote_address)
 
 tags_metadata = [
     {
-        "name": "Upload image",
+        "name": "Upload file",
     }
 ]
 
@@ -15,10 +15,19 @@ upload = APIRouter(tags=tags_metadata)
 
 @upload.post("/api/upload")
 @limiter.limit("42/minute")
-async def post_upload(request : Request, file : UploadFile, author = None):
+async def post_upload(request : Request, file : UploadFile, file_type : str):
+    await create_db()
+    if file_type.lower() not in ['png', 'txt', 'jpeg', 'gif', 'mp4', 'mp3']:
+        return {
+            "error" : "Must include file type, Options: png, txt, jpeg, gif, mp4, mp3]"
+        }
     file = await file.read()
-    code = await insert_image(bytes(file), author)
+    if len(file) > 15000000:
+        return {
+            "error" : "File to large, Max size 15mb"
+        }
+    code = await insert_file(bytes(file), file_type)
     return {
         "code" : code,
-        "url" : f"https://filehost.fusionsid.repl.co/api/image?code={code}"
+        "url" : f"https://filehost.fusionsid.repl.co/api/file?code={code}"
     }

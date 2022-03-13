@@ -4,19 +4,19 @@ import aiosqlite
 
 
 async def create_db():
-    async with aiosqlite.connect("utils/database/images.db") as db:
-        await db.execute("""CREATE TABLE Images (
+    async with aiosqlite.connect("utils/database/files.db") as db:
+        await db.execute("""CREATE TABLE IF NOT EXISTS files (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             code TEXT,
-            author TEXT,
-            image BLOB
+            file_type TEXT,
+            file BLOB
             )""")
         await db.commit()
 
 
 async def get_db():
-    async with aiosqlite.connect("utils/database/images.db") as db:
-        cur = await db.execute("""SELECT * FROM Images""")
+    async with aiosqlite.connect("utils/database/files.db") as db:
+        cur = await db.execute("""SELECT * FROM files""")
         data = await cur.fetchall()
     return data
 
@@ -27,8 +27,8 @@ async def create_code():
     while True:
         code = "".join(random.sample(choices, 8))
 
-        async with aiosqlite.connect("utils/database/images.db") as db:
-            cur = await db.execute(f"""SELECT * FROM Images WHERE code='{code}'""")
+        async with aiosqlite.connect("utils/database/files.db") as db:
+            cur = await db.execute(f"""SELECT * FROM files WHERE code='{code}'""")
             data = await cur.fetchall()
         
         if len(data) == 0:
@@ -37,25 +37,24 @@ async def create_code():
     return code
 
 
-async def insert_image(image_bytes : bytes, author : str = None):
+async def insert_file(file_bytes : bytes, file_type : str):
 
     code = await create_code()
 
-    async with aiosqlite.connect("utils/database/images.db") as db:
-        if author is None:
-            await db.execute(f"""INSERT INTO Images (code, image) VALUES (?, ?)""", (code, image_bytes))
+    async with aiosqlite.connect("utils/database/files.db") as db:
+        if file_type is None:
+            await db.execute(f"""INSERT INTO files (code, file) VALUES (?, ?)""", (code, file_bytes))
 
         else:
-            await db.execute("""INSERT INTO Images (code, author, image) VALUES (?, ?, ?)""", (code, author, image_bytes))
+            await db.execute("""INSERT INTO files (code, file_type, file) VALUES (?, ?, ?)""", (code, file_type, file_bytes))
         
         await db.commit()
-    print(code)
     return code
 
 
-async def get_image(code):
-    async with aiosqlite.connect("utils/database/images.db") as db:
-        cur = await db.execute(f"""SELECT * FROM Images WHERE code='{code}'""")
+async def get_file(code):
+    async with aiosqlite.connect("utils/database/files.db") as db:
+        cur = await db.execute(f"""SELECT * FROM files WHERE code='{code}'""")
         data = await cur.fetchall()
     try:
         return data[0]

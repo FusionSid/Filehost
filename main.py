@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
-from routers.image import image
+from routers.download import file
 from routers.upload import upload
 
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -15,7 +15,7 @@ description = """
 
 [My Github](https://github.com/FusionSid)
 
-This api lets you upload images which are stored and can be retreived later
+This api lets you upload files which are stored and can be retreived later
 
 #### Source Code:
 [https://github.com/FusionSid/Filehost](https://github.com/FusionSid/Filehost)
@@ -43,5 +43,5 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 async def home():
     return RedirectResponse("/docs")
 
-app.include_router(image)
+app.include_router(file)
 app.include_router(upload)
