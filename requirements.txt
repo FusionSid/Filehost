@@ -2,3 +2,4 @@ fastapi
 aiosqlite
 uvicorn
 python-multipart
+slowapi
