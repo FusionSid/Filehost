@@ -29,8 +29,8 @@ print(r.json())
 ### Example Output:
 ```
 {
-  "code": "14kwDlNF",
-  "url": "https://file-host.herokuapp.com/api/image?code=14kwDlNF"
+  "code": "uVIhGXvQ",
+  "url": "https://file-host.herokuapp.com/api/file?code=uVIhGXvQ"
 }
 ```
 
