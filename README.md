@@ -1,5 +1,8 @@
 # File storage API
 
+this is a temporary file hosting, the db does get cleared every so often. I might add a longer file host option but for now probably use this if you want to host a file for like a couple hours/minutes
+
+
 Supported file types: png, txt, jpeg, gif, mp4, mp3  
 Max file size: 15mb
 
